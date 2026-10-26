@@ -19,6 +19,13 @@ cmake --build build
 ./build/vector_add 16777216 20
 ```
 
+或使用固定 CUDA 13.4.3 的容器：
+
+```bash
+docker build -t nvidia-lab/cuda .
+docker run --rm --gpus all nvidia-lab/cuda 16777216 20
+```
+
 輸出是可保存的 JSON。自架 GitHub Actions Runner 可手動執行 `gpu.yml`；一般 push／PR 由 `ci.yml` 驗證，`pages.yml` 部署互動網站。
 
 ## 驗收重點

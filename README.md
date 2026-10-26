@@ -1,12 +1,29 @@
 # CUDA Data Residency Lab
 
-互動式 CPU–GPU 資料路徑實驗室，用於估算 H2D／D2H、批次大小、PCIe 頻寬與 CUDA Streams 重疊對端到端效能的影響。
+同時提供瀏覽器互動模型、可測試的 Python 成本模型，以及真實 CUDA kernel。用途是量化 H2D／D2H、批次大小、PCIe 頻寬與資料常駐策略。
 
-## 執行
+## 快速驗證
 
-直接開啟 `index.html`，或使用靜態網站伺服器。所有計算均在瀏覽器本機完成。
+```bash
+python -m unittest discover -s tests -v
+python src/residency_model.py --payload-mb 1024 --iterations 100 --transfers 2
+```
 
-## 實機延伸
+## NVIDIA 實機
 
-使用 CUDA sample、NVCC 與 Nsight Systems，將模擬結果替換為真實量測資料。
+需要 NVIDIA Driver、CUDA Toolkit、CMake 3.24+：
+
+```bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+./build/vector_add 16777216 20
+```
+
+輸出是可保存的 JSON。自架 GitHub Actions Runner 可手動執行 `gpu.yml`；一般 push／PR 由 `ci.yml` 驗證，`pages.yml` 部署互動網站。
+
+## 驗收重點
+
+- 比較逐輪傳輸與 device-resident pipeline。
+- 用 Nsight Systems 驗證 memcpy 與 kernel 是否重疊。
+- 固定資料量、warm-up、GPU clocks 和重複次數後才比較結果。
 

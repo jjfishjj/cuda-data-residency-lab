@@ -1,0 +1,16 @@
+name: NVIDIA GPU benchmark
+on:
+  workflow_dispatch:
+jobs:
+  benchmark:
+    runs-on: [self-hosted, linux, x64, gpu]
+    steps:
+      - uses: actions/checkout@v4
+      - run: nvidia-smi
+      - run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+      - run: cmake --build build --config Release
+      - run: ./build/vector_add 16777216 20 | tee benchmark.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cuda-benchmark
+          path: benchmark.json

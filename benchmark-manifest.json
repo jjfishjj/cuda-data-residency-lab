@@ -1,0 +1,25 @@
+{
+  "project": "cuda-data-residency-lab",
+  "benchmark_id": "cuda-data-residency-vector-add",
+  "result_schema_version": "1.0.0",
+  "cuda_toolkit": "13.4.3",
+  "cuda_toolkit_verification": "NVIDIA registry search verified 13.4.3-devel-ubuntu22.04 on 2026-11-24; pull/build not run in this sandbox",
+  "container": "nvidia/cuda:13.4.3-devel-ubuntu22.04",
+  "build": {
+    "cmake": "3.31.10",
+    "generator": "Ninja",
+    "cxx_standard": "17",
+    "cuda_standard": "17",
+    "compiler": "container-provided g++/nvcc"
+  },
+  "locked_benchmark_parameters": {
+    "elements": 16777216,
+    "iterations": 20,
+    "repetitions": 5,
+    "warmup_iterations": 1,
+    "seed": 12345,
+    "block_size": 256
+  },
+  "measurement_units": "seconds",
+  "note": "Parameters are defaults for reproducibility; actual CLI parameters are recorded in each result. GPU results require a real NVIDIA GPU and compatible driver."
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "benchmark_id": "cuda-data-residency-vector-add",
+  "run_id": "cpu-fixture-no-gpu",
+  "timestamp_utc": "2026-01-01T00:00:00Z",
+  "git": {"commit": null, "dirty": false},
+  "environment": {
+    "os": "Linux", "architecture": "x86_64", "python": "CPython 3.12.3", "cuda_runtime": null, "cuda_driver_api": null, "cuda_driver": null,
+    "software": {"nvcc": null},
+    "gpus": [{"index": 0, "name": null, "compute_capability": null, "memory_bytes": null}]
+  },
+  "parameters": {"elements": 16, "iterations": 2, "repetitions": 5, "warmup_iterations": 1, "seed": 12345},
+  "measurements": [{
+    "case_id": "cuda-unavailable", "backend": "cuda", "status": "skipped", "unit": "seconds", "input_rows": 16,
+    "output_rows": null, "warmup_iterations": 1, "iterations_per_sample": 2, "samples": [],
+    "statistics": {"median": null, "mean": null, "stdev": null, "min": null, "max": null},
+    "notes": "No CUDA device was available; no timing was fabricated."
+  }]
+}
